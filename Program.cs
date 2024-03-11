@@ -50,7 +50,7 @@ apiGroup.MapDelete("/companies/{id}", async (int id, JexContext ctx, Cancellatio
 
 #region JobOffer
 
-apiGroup.MapGet("/job-offers", (JexContext ctx, CancellationToken cancellationToken) => ctx.JobOffers.ToListAsync(cancellationToken));
+apiGroup.MapGet("/job-offers", (JexContext ctx, CancellationToken cancellationToken) => ctx.JobOffers.Include(p => p.Company).ToListAsync(cancellationToken));
 apiGroup.MapPut("/job-offers", async (JexContext ctx, [FromBody] JobOffer jobOffer, CancellationToken cancellationToken) =>
 {
     await ctx.JobOffers.AddAsync(jobOffer, cancellationToken);

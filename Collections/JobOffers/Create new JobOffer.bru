@@ -6,6 +6,14 @@ meta {
 
 put {
   url: {{BaseUrl}}/api/v1/job-offers
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "title": "Cake Engineer",
+    "description": "Turn code into cake",
+    "companyId": 2
+  }
 }
