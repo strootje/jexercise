@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { BackendService, Company, JobOffer } from '../BackendService';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +11,12 @@ export class HomeComponent {
 
   public selectedCompany: number = 0;
 
-  constructor(
-    http: HttpClient,
-    @Inject('BASE_URL')
-    baseUrl: string,
-  ) {
-    http.get<Company[]>(`${baseUrl}api/v1/companies`).subscribe((companies) => {
+  constructor(backend: BackendService) {
+    backend.getCompanies().subscribe((companies) => {
       this.companies = companies;
     });
 
-    http.get<JobOffer[]>(`${baseUrl}api/v1/job-offers`).subscribe((jobOffers) => {
+    backend.getJobOffers().subscribe((jobOffers) => {
       this.jobOffers = jobOffers;
     });
   }
@@ -48,25 +44,4 @@ export class HomeComponent {
   public jobOffersPerCompany(company: Company) {
     return this.jobOffers.filter((p) => p.company.id === company.id).length;
   }
-}
-
-export interface Company {
-  id: number;
-  name: string;
-  address: Address;
-  jobOffers: JobOffer[];
-}
-
-export interface Address {
-  street: string;
-  city: string;
-  zipcode: string;
-  country: string;
-}
-
-export interface JobOffer {
-  id: number;
-  title: string;
-  description: string;
-  company: Company;
 }

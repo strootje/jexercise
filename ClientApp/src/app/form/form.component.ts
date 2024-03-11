@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Company } from '../home/home.component';
+import { BackendService, Company } from '../BackendService';
 
 @Component({
   selector: 'app-form',
@@ -13,9 +12,7 @@ export class FormComponent {
 
   constructor(
     formBuilder: FormBuilder,
-    private http: HttpClient,
-    @Inject('BASE_URL')
-    private baseUrl: string,
+    private backend: BackendService,
   ) {
     this.createOfferForm = formBuilder.group({
       title: '',
@@ -25,12 +22,7 @@ export class FormComponent {
   }
 
   public onSubmit(): void {
-    this.http
-      .put(`${this.baseUrl}api/v1/job-offers`, {
-        title: this.createOfferForm.value.title,
-        description: this.createOfferForm.value.description,
-        companyId: this.createOfferForm.value.companyId,
-      })
-      .subscribe(console.log);
+    const values = this.createOfferForm.value;
+    this.backend.newJobOffer(values.companyId, values.title, values.description).subscribe(console.log);
   }
 }

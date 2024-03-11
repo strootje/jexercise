@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Company } from '../home/home.component';
+import { Company } from '../BackendService';
 
 @Component({
   selector: 'app-badge',
