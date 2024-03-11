@@ -8,10 +8,8 @@ import { Company } from '../home/home.component';
   templateUrl: './form.component.html',
 })
 export class FormComponent {
-  public createOfferForm: FormGroup;
-
-  @Input('companies')
-  public companies!: Company[];
+  createOfferForm: FormGroup;
+  @Input() companies!: Company[];
 
   constructor(
     formBuilder: FormBuilder,

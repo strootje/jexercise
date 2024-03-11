@@ -6,10 +6,7 @@ import { Company } from '../home/home.component';
   templateUrl: './badge.component.html',
 })
 export class BadgeComponent {
-  @Input('company')
-  public company!: Company;
-  @Input('isActive')
-  public isActive!: boolean;
-  @Input('offerCount')
-  public offerCount!: number;
+  @Input() company!: Company;
+  @Input() isActive!: boolean;
+  @Input() offerCount!: number;
 }

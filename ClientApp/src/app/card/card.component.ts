@@ -6,8 +6,5 @@ import { JobOffer } from '../home/home.component';
   templateUrl: './card.component.html',
 })
 export class CardComponent {
-  @Input('jobOffer')
-  public jobOffer!: JobOffer;
-
-  constructor() {}
+  @Input() jobOffer!: JobOffer;
 }
