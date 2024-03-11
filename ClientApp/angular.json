@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "jexercise"
+  "defaultProject": "jexercise",
+  "cli": {
+    "analytics": false
+  }
 }
