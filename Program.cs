@@ -1,10 +1,10 @@
 using jexercise;
-using jexercise.Migrations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<JexConfiguration>();
 builder.Services.AddDbContext<JexContext>();
 
@@ -73,6 +73,20 @@ apiGroup.MapDelete("/job-offers/{id}", async (int id, JexContext ctx, Cancellati
 });
 
 #endregion
+
+using (var scope = app.Services.CreateScope())
+{
+    // Migrate on startup
+    scope.ServiceProvider
+        .GetRequiredService<JexContext>()
+        .Database.Migrate();
+}
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}");
+
+app.MapFallbackToFile("index.html");
 
 app.Run();
 

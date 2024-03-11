@@ -21,7 +21,7 @@ export class HomeComponent {
     });
   }
 
-  public toggleCompany(company: Company) {
+  toggleCompany(company: Company) {
     if (this.selectedCompany === company.id) {
       this.selectedCompany = 0;
     } else {
@@ -29,19 +29,19 @@ export class HomeComponent {
     }
   }
 
-  public isSelected(company: Company) {
+  isSelected(company: Company) {
     return this.selectedCompany === 0 || this.selectedCompany === company.id;
   }
 
-  public filterCompanies() {
+  filterCompanies() {
     return this.companies.filter((c) => this.jobOffers.map((p) => p.company.id).find((p) => p === c.id));
   }
 
-  public filterJobOffers() {
+  filterJobOffers() {
     return this.jobOffers.filter((p) => this.isSelected(p.company));
   }
 
-  public jobOffersPerCompany(company: Company) {
+  jobOffersPerCompany(company: Company) {
     return this.jobOffers.filter((p) => p.company.id === company.id).length;
   }
 }

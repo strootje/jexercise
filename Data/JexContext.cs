@@ -3,12 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace jexercise;
 
-public interface ModelWithId
-{
-   int Id { get; }
-}
-
-public class Company : ModelWithId
+public class Company
 {
    public int Id { get; set; }
    public string? Name { get; set; }
@@ -26,7 +21,7 @@ public class Address
    public string? Country { get; set; }
 }
 
-public class JobOffer : ModelWithId
+public class JobOffer
 {
    public int Id { get; set; }
    public string? Title { get; set; }
