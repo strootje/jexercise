@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +10,11 @@ export class HomeComponent {
   public jobOffers: JobOffer[] = [];
 
   public selectedCompany: number = 0;
-  public createOfferForm: FormGroup;
 
   constructor(
-    formBuilder: FormBuilder,
-    private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string,
+    http: HttpClient,
+    @Inject('BASE_URL')
+    baseUrl: string,
   ) {
     http.get<Company[]>(`${baseUrl}api/v1/companies`).subscribe((companies) => {
       this.companies = companies;
@@ -25,12 +22,6 @@ export class HomeComponent {
 
     http.get<JobOffer[]>(`${baseUrl}api/v1/job-offers`).subscribe((jobOffers) => {
       this.jobOffers = jobOffers;
-    });
-
-    this.createOfferForm = formBuilder.group({
-      title: '',
-      companyId: 0,
-      description: '',
     });
   }
 
@@ -56,16 +47,6 @@ export class HomeComponent {
 
   public jobOffersPerCompany(company: Company) {
     return this.jobOffers.filter((p) => p.company.id === company.id).length;
-  }
-
-  public onSubmit(): void {
-    this.http
-      .put(`${this.baseUrl}api/v1/job-offers`, {
-        title: this.createOfferForm.value.title,
-        description: this.createOfferForm.value.description,
-        companyId: this.createOfferForm.value.companyId,
-      })
-      .subscribe(console.log);
   }
 }
 

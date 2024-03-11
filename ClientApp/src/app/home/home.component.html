@@ -5,84 +5,20 @@
 
   <div class="flex flex-col gap-4 px-2">
     <div class="flex gap-2">
-      <button
-        class="relative flex aspect-square w-[64px] place-content-center place-items-center rounded-full border-2 border-slate-950 bg-blue-500 text-sm"
+      <app-badge
         *ngFor="let company of filterCompanies()"
+        [company]="company"
+        [isActive]="isSelected(company)"
+        [offerCount]="jobOffersPerCompany(company)"
         (click)="toggleCompany(company)"
-      >
-        <span>{{ company.name }}</span>
-
-        <span class="absolute -right-3 -top-3 aspect-square w-8 rounded-full border-2 border-yellow-400 bg-slate-300 text-center" *ngIf="isSelected(company)">
-          {{ jobOffersPerCompany(company) }}
-        </span>
-
-        <span class="absolute -right-3 -top-3 aspect-square w-8 rounded-full border-2 border-gray-50 bg-slate-300 text-center" *ngIf="!isSelected(company)">
-          {{ jobOffersPerCompany(company) }}
-        </span>
-      </button>
+      />
     </div>
 
     <section class="flex flex-wrap gap-4">
-      <article class="max-w-sm overflow-hidden rounded shadow-lg" *ngFor="let jobOffer of filterJobOffers()">
-        <img
-          class="w-full"
-          src="https://codingweek.org/wp-content/uploads/2019/08/christopher-robin-ebbinghaus-pgSkeh0yl8o-unsplash.jpg"
-          alt="Sunset in the mountains"
-        />
-        <div class="px-6 py-4">
-          <div class="mb-2 text-xl font-bold">{{ jobOffer.title }}</div>
-          <p class="text-base text-gray-700">
-            {{ jobOffer.description }}
-          </p>
-        </div>
-        <div class="px-6 pb-2 pt-4">
-          <span class="mb-2 mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">#{{ jobOffer.company.name }}</span>
-          <span class="mb-2 mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700"
-            >#{{ jobOffer.company.address.city }}</span
-          >
-          <span class="mb-2 mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">#coding</span>
-        </div>
-      </article>
+      <app-card *ngFor="let jobOffer of filterJobOffers()" [jobOffer]="jobOffer" />
+      <app-form [companies]="companies" />
     </section>
 
-    <div class="w-full max-w-xs">
-      <form class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md" [formGroup]="createOfferForm" (submit)="onSubmit()">
-        <div class="mb-4">
-          <label class="mb-2 block text-sm font-bold text-gray-700" for="title"> Title </label>
-          <input
-            class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-            id="title"
-            type="text"
-            placeholder="Title"
-            formControlName="title"
-          />
-        </div>
-        <div class="mb-4">
-          <label class="mb-2 block text-sm font-bold text-gray-700" for="companyId"> Company </label>
-          <select
-            class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-            id="companyId"
-            type="text"
-            placeholder="Title"
-            formControlName="companyId"
-          >
-            <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
-          </select>
-        </div>
-        <div class="mb-6">
-          <label class="mb-2 block text-sm font-bold text-gray-700" for="description"> Description </label>
-          <textarea
-            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-            id="description"
-            formControlName="description"
-          ></textarea>
-        </div>
-        <div class="flex items-center justify-between">
-          <button class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none" type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
+    <div class="w-full max-w-xs"></div>
   </div>
 </div>

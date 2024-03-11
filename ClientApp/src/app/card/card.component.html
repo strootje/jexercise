@@ -1,0 +1,18 @@
+<article class="max-w-sm overflow-hidden rounded shadow-lg">
+  <img
+    class="w-full"
+    src="https://codingweek.org/wp-content/uploads/2019/08/christopher-robin-ebbinghaus-pgSkeh0yl8o-unsplash.jpg"
+    alt="Sunset in the mountains"
+  />
+  <div class="px-6 py-4">
+    <div class="mb-2 text-xl font-bold">{{ jobOffer.title }}</div>
+    <p class="text-base text-gray-700">
+      {{ jobOffer.description }}
+    </p>
+  </div>
+  <div class="px-6 pb-2 pt-4">
+    <span class="mb-2 mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">#{{ jobOffer.company.name }}</span>
+    <span class="mb-2 mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">#{{ jobOffer.company.address.city }}</span>
+    <span class="mb-2 mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">#coding</span>
+  </div>
+</article>
