@@ -7,7 +7,9 @@
       type="text"
       placeholder="Title"
       formControlName="title"
+      required
     />
+    <p class="text-xs italic text-red-500" *ngIf="(title?.dirty || title?.touched) && !title?.valid">Please choose a title.</p>
   </div>
   <div class="mb-4">
     <label class="mb-2 block text-sm font-bold text-gray-700" for="companyId"> Company </label>
@@ -17,9 +19,11 @@
       type="text"
       placeholder="Title"
       formControlName="companyId"
+      required
     >
       <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
     </select>
+    <p class="text-xs italic text-red-500" *ngIf="(companyId?.dirty || companyId?.touched) && !companyId?.valid">Please choose a company.</p>
   </div>
   <div class="mb-6">
     <label class="mb-2 block text-sm font-bold text-gray-700" for="description"> Description </label>

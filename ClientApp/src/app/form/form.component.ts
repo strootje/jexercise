@@ -21,8 +21,22 @@ export class FormComponent {
     });
   }
 
-  public onSubmit(): void {
+  onSubmit(): void {
     const values = this.createOfferForm.value;
-    this.backend.newJobOffer(values.companyId, values.title, values.description).subscribe(console.log);
+    if (this.createOfferForm.valid) {
+      this.backend.newJobOffer(values.companyId, values.title, values.description).subscribe(console.log);
+    }
+  }
+
+  get title() {
+    return this.createOfferForm.get('title');
+  }
+
+  get companyId() {
+    return this.createOfferForm.get('companyId');
+  }
+
+  get description() {
+    return this.createOfferForm.get('description');
   }
 }
