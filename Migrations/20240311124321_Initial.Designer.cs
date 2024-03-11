@@ -10,7 +10,7 @@ using jexercise;
 namespace jexercise.Migrations
 {
     [DbContext(typeof(JexContext))]
-    [Migration("20240311115134_Initial")]
+    [Migration("20240311124321_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -30,6 +30,9 @@ namespace jexercise.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Companies", (string)null);
                 });

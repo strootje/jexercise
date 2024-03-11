@@ -48,6 +48,12 @@ namespace jexercise.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Companies_Name",
+                table: "Companies",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_JobOffers_CompanyId",
                 table: "JobOffers",
                 column: "CompanyId");

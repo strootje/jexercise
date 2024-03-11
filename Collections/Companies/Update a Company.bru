@@ -5,7 +5,19 @@ meta {
 }
 
 post {
-  url: {{BaseUrl}}/api/v1/companies
-  body: none
+  url: {{BaseUrl}}/api/v1/companies/1
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "Jex",
+    "address": {
+      "street": "Nassaukade 5",
+      "city": "Rotterdam",
+      "Country": "Netherlands",
+      "Zipcode": "3071 JL"
+    }
+  }
 }

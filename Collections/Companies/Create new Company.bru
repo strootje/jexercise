@@ -6,6 +6,18 @@ meta {
 
 put {
   url: {{BaseUrl}}/api/v1/companies
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "Jex",
+    "address": {
+      "street": "Nassaukade 5",
+      "city": "Rotterdam",
+      "Country": "Netherlands",
+      "Zipcode": "3071 JL"
+    }
+  }
 }
