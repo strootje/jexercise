@@ -1,0 +1,25 @@
+<div class="flex flex-col gap-4">
+  <header class="border-b-2 border-slate-950 bg-blue-500 p-8">
+    <h1 class="text-5xl">{{ company.name }} - Jexercise Job Offers</h1>
+
+    <aside>
+      <a [routerLink]="['/']">&lt; home</a>
+    </aside>
+  </header>
+
+  <div class="flex flex-col gap-4 px-2">
+    <section class="flex flex-wrap gap-4">
+      <app-card *ngFor="let jobOffer of jobOffers" [jobOffer]="jobOffer" />
+    </section>
+
+    <section>
+      <h2 class="text-4xl">Address</h2>
+
+      <ul>
+        <li>{{ company.address.street }}</li>
+        <li>{{ company.address.city }}, {{ company.address.zipcode }}</li>
+        <li>{{ company.address.country }}</li>
+      </ul>
+    </section>
+  </div>
+</div>

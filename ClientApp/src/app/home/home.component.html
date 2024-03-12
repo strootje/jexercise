@@ -19,6 +19,13 @@
       <app-form [companies]="companies" />
     </section>
 
-    <div class="w-full max-w-xs"></div>
+    <footer class="mt-6 bg-blue-500 p-8">
+      <h3 class="text-3xl">Companies</h3>
+      <ul>
+        <li *ngFor="let company of companies">
+          <a [routerLink]="['company', company.id]">{{ company.name }}</a>
+        </li>
+      </ul>
+    </footer>
   </div>
 </div>

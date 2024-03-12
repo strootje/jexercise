@@ -13,8 +13,20 @@ export class BackendService {
     return this.http.get<Company[]>(`${this.baseUrl}api/v1/companies`);
   }
 
+  public getCompany(id: number) {
+    return this.http.get<Company>(`${this.baseUrl}api/v1/companies/${id}`);
+  }
+
   public getJobOffers() {
     return this.http.get<JobOffer[]>(`${this.baseUrl}api/v1/job-offers`);
+  }
+
+  public getJobOfferById(id: number) {
+    return this.http.get<JobOffer>(`${this.baseUrl}api/v1/job-offers/${id}`);
+  }
+
+  public getJobOffersByCompanyId(id: number) {
+    return this.http.get<JobOffer[]>(`${this.baseUrl}api/v1/job-offers/company/${id}`);
   }
 
   public newJobOffer(companyId: number, title: string, description: string) {

@@ -1,0 +1,13 @@
+<div class="flex flex-col gap-4">
+  <header class="border-b-2 border-slate-950 bg-blue-500 p-8">
+    <h1 class="text-5xl">{{ jobOffer.title }} - Jexercise Job Offers</h1>
+
+    <aside>
+      <a [routerLink]="['/']">&lt; home</a>&nbsp;&nbsp;&nbsp;<a [routerLink]="['/', 'company', jobOffer.company.id]">&lt; {{ jobOffer.company.name }}</a>
+    </aside>
+  </header>
+
+  <div class="flex flex-col gap-4 px-2">
+    <app-card [jobOffer]="jobOffer" />
+  </div>
+</div>

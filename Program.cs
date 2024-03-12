@@ -30,6 +30,7 @@ apiGroup.MapPut("/companies", async (JexContext ctx, [FromBody] Company company,
     await ctx.Companies.AddAsync(company, cancellationToken);
     await ctx.SaveChangesAsync(cancellationToken);
 });
+apiGroup.MapGet("/companies/{id}", (int id, JexContext ctx, CancellationToken cancellationToken) => ctx.Companies.SingleAsync(p => p.Id == id, cancellationToken));
 apiGroup.MapPost("/companies/{id}", async (int id, JexContext ctx, [FromBody] Company newCompany, CancellationToken cancellationToken) =>
 {
     var company = await ctx.Companies.Where(p => p.Id == id).SingleAsync(cancellationToken);
@@ -51,11 +52,13 @@ apiGroup.MapDelete("/companies/{id}", async (int id, JexContext ctx, Cancellatio
 #region JobOffer
 
 apiGroup.MapGet("/job-offers", (JexContext ctx, CancellationToken cancellationToken) => ctx.JobOffers.Include(p => p.Company).ToListAsync(cancellationToken));
+apiGroup.MapGet("/job-offers/company/{id}", (int id, JexContext ctx, CancellationToken cancellationToken) => ctx.JobOffers.Where(p => p.CompanyId == id).Include(p => p.Company).ToListAsync(cancellationToken));
 apiGroup.MapPut("/job-offers", async (JexContext ctx, [FromBody] JobOffer jobOffer, CancellationToken cancellationToken) =>
 {
     await ctx.JobOffers.AddAsync(jobOffer, cancellationToken);
     await ctx.SaveChangesAsync(cancellationToken);
 });
+apiGroup.MapGet("/job-offers/{id}", (int id, JexContext ctx, CancellationToken cancellationToken) => ctx.JobOffers.Include(p => p.Company).SingleAsync(p => p.Id == id, cancellationToken));
 apiGroup.MapPost("/job-offers/{id}", async (int id, JexContext ctx, [FromBody] JobOffer newJobOffer, CancellationToken cancellationToken) =>
 {
     var jobOffer = await ctx.JobOffers.Where(p => p.Id == id).SingleAsync(cancellationToken);
